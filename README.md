@@ -45,7 +45,7 @@ private onDoubleTap(event:neoges.GestureEvent):void {
 }
 ```
 
-所有手势的使用方式，可以从这里找到：[源码](https://github.com/NeoGuo/egret_gesture/src)
+所有手势的使用方式，可以从这里找到：[MainTest](https://github.com/NeoGuo/egret_gesture/blob/master/test/MainTest.ts)
 
 扩展
 -------------------
