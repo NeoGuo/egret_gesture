@@ -48,7 +48,11 @@ module neoges
             if(this._target != null)
                 this.addHostToManager();
         }
-
+        /**位置*/
+        public _location:egret.Point = new egret.Point();
+        public get location():egret.Point {
+            return this._location.clone();
+        }
         /**构造方法*/
         public constructor(target:egret.DisplayObject=null) {
             super();
@@ -97,6 +101,20 @@ module neoges
             evt.host = this._target;
             this.dispatchEvent(evt);
             this._stats = -1;
+        }
+        /**实现Flash中Point的subtract方法*/
+        public subtract(p1:egret.Point,p2:egret.Point):egret.Point {
+            var p:egret.Point = new egret.Point();
+            p.x = p1.x-p2.x;
+            p.y = p1.y-p2.y;
+            return p;
+        }
+        /**实现Flash中Point的length*/
+        public getPointLength(p:egret.Point):number {
+            var len:number = 0;
+            var p0:egret.Point = new egret.Point(0,0);
+            len = egret.Point.distance(p,p0);
+            return len;
         }
         /**释放*/
         public dispose():void {

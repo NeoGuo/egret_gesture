@@ -40,8 +40,15 @@ class Main extends egret.DisplayObjectContainer {
      * 创建游戏场景
      */
     private createGameScene(): void {
-        var test:MainTest = new MainTest();
-        this.addChild(test);
+        if(document.location.toString().indexOf("type=2") == -1) {
+            document.title = "普通手势测试";
+            var test1:MainTest = new MainTest();
+            this.addChild(test1);
+        } else {
+            document.title = "变换测试";
+            var test2:TransformTest = new TransformTest();
+            this.addChild(test2);
+        }
     }
 
 }
