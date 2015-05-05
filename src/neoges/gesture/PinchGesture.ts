@@ -25,22 +25,27 @@ module neoges
                 neoges.GestureManager.simulatePoints = [evt2];
                 ec = [evt1,evt2];
             }
-            if(ec.length<2)
+            if(ec.length<2) {
                 return;
+            }
             evt1 = ec[0];
             evt2 = ec[1];
             if(evt2.type == egret.TouchEvent.TOUCH_BEGIN){
                 this.gestureBegan();
                 this.startLen = egret.Point.distance(new egret.Point(evt1.stageX,evt1.stageY),new egret.Point(evt2.stageX,evt2.stageY));
             }
+            else if(evt1.type == egret.TouchEvent.TOUCH_END || evt2.type == egret.TouchEvent.TOUCH_END) {
+                this.gestureEnded();
+            }
             else if(evt1.type == egret.TouchEvent.TOUCH_MOVE || evt2.type == egret.TouchEvent.TOUCH_MOVE) {
                 this.currentLen = egret.Point.distance(new egret.Point(evt1.stageX,evt1.stageY),new egret.Point(evt2.stageX,evt2.stageY));
                 this.gestureUpdate();
             }
-            else if(evt1.type == egret.TouchEvent.TOUCH_END || evt2.type == egret.TouchEvent.TOUCH_END) {
-                neoges.GestureManager.simulatePoints = [];
-                this.gestureEnded();
-            }
+        }
+        /**触点更新*/
+        public gestureEnded():void {
+            neoges.GestureManager.simulatePoints = [];
+            super.gestureEnded();
         }
         /**触点更新*/
         public gestureUpdate():void {

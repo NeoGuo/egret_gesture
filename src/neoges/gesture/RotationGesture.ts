@@ -44,10 +44,12 @@ module neoges
                 this._rotationStart = Math.atan2(dy, dx) * 180 / Math.PI;
             }
             else if(evt1.type == egret.TouchEvent.TOUCH_MOVE || evt2.type == egret.TouchEvent.TOUCH_MOVE) {
-                dy = p2.x - this._transformVector.x;
-                dx = p2.y - this._transformVector.y;
-                this._rotation = this._rotationStart-Math.atan2(dy, dx) * 180 / Math.PI;
-                this.gestureUpdate();
+                if(this._stats != -1) {
+                    dy = p2.x - this._transformVector.x;
+                    dx = p2.y - this._transformVector.y;
+                    this._rotation = this._rotationStart-Math.atan2(dy, dx) * 180 / Math.PI;
+                    this.gestureUpdate();
+                }
             }
             else if(evt1.type == egret.TouchEvent.TOUCH_END || evt2.type == egret.TouchEvent.TOUCH_END) {
                 neoges.GestureManager.simulatePoints = [];
