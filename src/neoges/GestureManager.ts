@@ -44,7 +44,7 @@ module neoges
                 console.warn("不存在这个实例");
                 return;
             }
-            hc.slice(index,1);
+            hc.splice(index,1);
             neoges.GestureManager.removeEvent(value.target);
             neoges.GestureManager.eventDict[value.target.hashCode] = null;
         }
@@ -106,6 +106,8 @@ module neoges
             if(neoges.GestureManager.showTouchPoint) {
                 neoges.GestureManager.drawTouchPoint();
             }
+            
+            e.stopPropagation();
         }
         /**根据TOUCH ID判断是不是已经存在了这个触碰对象*/
         private static hasTouchEvent(e:egret.TouchEvent):boolean {
