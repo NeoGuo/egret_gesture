@@ -19,8 +19,6 @@ module neoges
         private static hostCollection:neoges.AbstractGesture[] = [];
         /**事件字典,每一个显示对象对应一个数组存储事件*/
         private static eventDict:Object = {};
-        /**事件池*/
-        private static evtPool:neoges.EventPool = new neoges.EventPool();
         /**用于辅助显示*/
         private static drawLayer:egret.Sprite = new egret.Sprite();
         /**private*/
@@ -44,7 +42,7 @@ module neoges
                 console.warn("不存在这个实例");
                 return;
             }
-            hc.splice(index,1);
+            hc.slice(index,1);
             neoges.GestureManager.removeEvent(value.target);
             neoges.GestureManager.eventDict[value.target.hashCode] = null;
         }
@@ -84,11 +82,11 @@ module neoges
             var currentEvent:egret.TouchEvent;
             var evtIndex:number = -1;
             if(!neoges.GestureManager.hasTouchEvent(e)) {
-                currentEvent = neoges.GestureManager.evtPool.clone(e);
+                currentEvent = e;
                 ec.push(currentEvent);
             } else {
                 currentEvent = neoges.GestureManager.getTouchEventByID(e.touchPointID,target);
-                neoges.GestureManager.evtPool.setProperties(e,currentEvent);
+                neoges.GestureManager.replaceEvent(e,currentEvent,target);
             }
             //通知手势对象
             var hc:neoges.AbstractGesture[] = neoges.GestureManager.hostCollection;
@@ -106,8 +104,16 @@ module neoges
             if(neoges.GestureManager.showTouchPoint) {
                 neoges.GestureManager.drawTouchPoint();
             }
-            
-            e.stopPropagation();
+        }
+        /**设置事件*/
+        private static replaceEvent(e:egret.TouchEvent,currentEvent:egret.TouchEvent,target:egret.DisplayObject):void {
+            var ec:egret.TouchEvent[] = neoges.GestureManager.eventDict[target.hashCode];
+            for (var index = 0; index < ec.length; index++) {
+                if (ec[index].touchPointID == e.touchPointID) {
+                    ec[index] = e;
+                    break;
+                }
+            }
         }
         /**根据TOUCH ID判断是不是已经存在了这个触碰对象*/
         private static hasTouchEvent(e:egret.TouchEvent):boolean {
@@ -139,8 +145,7 @@ module neoges
             var stage:egret.Stage = egret.MainContext.instance.stage;
             for (var key in neoges.GestureManager.eventDict) {
                 var ec:egret.TouchEvent[] = neoges.GestureManager.eventDict[key];
-                if(ec != null)
-                    neoges.GestureManager.evtPool.reclaimAll(ec);
+                ec.length = 0;
             }
             stage.removeEventListener(egret.TouchEvent.TOUCH_MOVE, neoges.GestureManager.touchedHandler, stage);
             stage.removeEventListener(egret.TouchEvent.TOUCH_END, neoges.GestureManager.touchedHandler, stage);

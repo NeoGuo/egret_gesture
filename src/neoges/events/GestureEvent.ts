@@ -16,8 +16,8 @@ module neoges
         public offsetX:number;
         public offsetY:number;
 
-        public rotation:number;
-        public scale:number;
+        public rotation:number = 0;
+        public scale:number = 1;
 
         public constructor(type:string) {
             super(type);

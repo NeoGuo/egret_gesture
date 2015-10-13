@@ -35,7 +35,8 @@ class MainTest extends egret.DisplayObjectContainer
         var icon: egret.Bitmap = util.createBitmapByName("egretIcon");
         icon.touchEnabled = true;
         icon.name = "icon";
-        icon.anchorX = icon.anchorY = 0.5;
+        icon.anchorOffsetX = icon.width/2;
+        icon.anchorOffsetY = icon.height/2;
         this.addChild(icon);
         icon.x = stageW / 2;
         icon.y = stageH / 2 - 180;
@@ -78,6 +79,7 @@ class MainTest extends egret.DisplayObjectContainer
         tap3.addEventListener(neoges.GestureEvent.BEGAN,this.onPinchBegan,this);
         tap3.addEventListener(neoges.GestureEvent.UPDATE,this.onPinchUpdate,this);
         tap3.addEventListener(neoges.GestureEvent.ENDED,this.onPinchEnd,this);
+        console.log("tap3 here");
         //Rotation(旋转)
         var tap4:neoges.RotationGesture = new neoges.RotationGesture(this.icon);
         tap4.addEventListener(neoges.GestureEvent.BEGAN,this.onRotationBegan,this);
@@ -114,7 +116,7 @@ class MainTest extends egret.DisplayObjectContainer
 
     /**pinch*/
     private onPinchBegan(event:neoges.GestureEvent):void {
-        //console.log("pinch began on "+event.host.name);
+        this.showMsg("pinch began on "+event.host.name);
         this.startScaleValue = this.icon.scaleX;
     }
     /**pinch*/
@@ -154,7 +156,7 @@ class MainTest extends egret.DisplayObjectContainer
     }
     /**pan*/
     private onPanEnd(event:neoges.GestureEvent):void {
-        this.showMsg("pan end on "+event.host.name);
+        //this.showMsg("pan end on "+event.host.name);
     }
     /**不需要手势的时候，可以清理手势*/
     private clearGesture(gestureInstance:neoges.IGesture):void {

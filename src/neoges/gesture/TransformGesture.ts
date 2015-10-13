@@ -46,6 +46,7 @@ module neoges
                 this._transformVector = this.subtract(p2,p1);
                 this.updateLocation(p1,p2);
                 this.distance = egret.Point.distance(p2,p1);
+                //console.log("for",this.target.scaleX);
                 this.startScale = this.target.scaleX;
             }
             else if(evt1.type == egret.TouchEvent.TOUCH_MOVE || evt2.type == egret.TouchEvent.TOUCH_MOVE) {
@@ -58,6 +59,7 @@ module neoges
                 this._rotation = Math.atan2(currTransformVector.y, currTransformVector.x) - Math.atan2(this._transformVector.y, this._transformVector.x);
                 //this._scale = this.getPointLength(currTransformVector) / this.getPointLength(this._transformVector);
                 var currentDistance:number = egret.Point.distance(p2,p1);
+                //console.log(this.startScale,currentDistance,this.distance);
                 this._scale = this.startScale*(currentDistance/this.distance);
                 this._transformVector = this.subtract(p2,p1);
                 this.gestureUpdate();
@@ -87,7 +89,6 @@ module neoges
         }
         /**获取一个事件的映像副本(for test)*/
         private reverseEvent(evt1:egret.TouchEvent):egret.TouchEvent {
-            var evt2:egret.TouchEvent = new egret.TouchEvent(evt1.type);
             var globalX:number = evt1.stageX;
             var globalY:number = evt1.stageY;
             var t:egret.DisplayObject = this.target;
@@ -95,9 +96,10 @@ module neoges
             var dix:number = globalX-op.x;
             var diy:number = globalY-op.y;
             var tp:egret.Point = new egret.Point(op.x-dix,op.y-diy);
+            var evt2:egret.TouchEvent = new egret.TouchEvent(evt1.type,true,false,0,tp.x,tp.y);
             //var tp:egret.Point = new egret.Point(op.x+dix/2,op.y+diy/2);
-            evt2._stageX = tp.x;
-            evt2._stageY = tp.y;
+            evt2.$stageX = tp.x;
+            evt2.$stageY = tp.y;
             return evt2;
         }
     }

@@ -73,16 +73,16 @@ module neoges
         }
         /**获取一个事件的映像副本(for test)*/
         private reverseEvent(evt1:egret.TouchEvent):egret.TouchEvent {
-            var evt2:egret.TouchEvent = new egret.TouchEvent(evt1.type);
             var globalX:number = evt1.stageX;
             var globalY:number = evt1.stageY;
             var t:egret.DisplayObject = this.target;
-            var op:egret.Point = t.localToGlobal(t.anchorX*t.width,t.anchorY*t.height);
+            var op:egret.Point = t.localToGlobal(t.anchorOffsetX,t.anchorOffsetY);
             var dix:number = globalX-op.x;
             var diy:number = globalY-op.y;
             var tp:egret.Point = new egret.Point(op.x-dix,op.y-diy);
-            evt2._stageX = tp.x;
-            evt2._stageY = tp.y;
+            var evt2:egret.TouchEvent = new egret.TouchEvent(evt1.type,true,false,0,tp.x,tp.y);
+            evt2.$stageX = tp.x;
+            evt2.$stageY = tp.y;
             return evt2;
         }
     }

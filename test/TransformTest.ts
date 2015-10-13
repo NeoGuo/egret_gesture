@@ -39,6 +39,7 @@ class TransformTest extends egret.DisplayObjectContainer
         icon.x = stageW / 2-icon.width/2;
         icon.y = stageH / 2 - 180;
         this.icon = icon;
+        //console.log(this.icon.scaleX);
         //ui
         if(egret.MainContext.deviceType == egret.MainContext.DEVICE_PC) {
             var btn:MyToggleButton = new MyToggleButton();
@@ -116,6 +117,7 @@ class TransformTest extends egret.DisplayObjectContainer
             this.icon.x -= offsetX;
             this.icon.y -= offsetY;
             this.icon.rotation += event.rotation*180/Math.PI;
+            //console.log(event.rotation);
             this.icon.scaleX = event.scale;
             this.icon.scaleY = this.icon.scaleX;
         }
