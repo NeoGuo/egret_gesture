@@ -1,0 +1,23 @@
+{
+	"name": "egret",
+	"version": "2.5.1",
+	"modules": [
+		{
+			"name": "neoges_lib",
+			"description": "Neo Gesture Lib",
+			"files": ["events/GestureEvent.ts",
+                "events/TouchData.ts",
+                "gesture/AbstractGesture.ts",
+                "gesture/DoubleTapGesture.ts",
+                "gesture/LongPressGesture.ts",
+                "gesture/PanGesture.ts",
+                "gesture/PinchGesture.ts",
+                "gesture/RotationGesture.ts",
+                "gesture/SwipeGesture.ts",
+                "gesture/TapGesture.ts",
+                "gesture/TransformGesture.ts",
+                "GestureManager.ts"],
+			"root": "src/neoges"
+		}
+	]
+}
