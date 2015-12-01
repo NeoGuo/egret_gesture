@@ -760,6 +760,7 @@ var neoges;
             hc.slice(index, 1);
             neoges.GestureManager.removeEvent(value.target);
             neoges.GestureManager.eventDict[value.target.hashCode] = null;
+            delete neoges.GestureManager.eventDict[value.target.hashCode];
         };
         /**注册事件侦听*/
         GestureManager.registerEvent = function (value) {

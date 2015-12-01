@@ -110,7 +110,7 @@ declare module neoges {
         /**构造方法*/
         constructor(host?: egret.DisplayObject);
         /**收到事件*/
-        onTouch(eventCollection: neoges.TouchData[]): void;
+        onTouch(eventCollection: TouchData[]): void;
         /**手势结束*/
         gestureEnded(): void;
         /**检测超时*/
