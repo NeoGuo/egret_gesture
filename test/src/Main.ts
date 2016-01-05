@@ -49,6 +49,11 @@ class Main extends egret.DisplayObjectContainer {
             var test2:TransformTest = new TransformTest();
             this.addChild(test2);
         }
+        
+        var vj:VirtualJoystickView = new VirtualJoystickView();
+        vj.x = 10;
+        vj.y = 300;
+        this.addChild(vj);
     }
 
 }
