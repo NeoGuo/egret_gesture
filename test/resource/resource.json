@@ -3,11 +3,14 @@
 	[
 		{"name":"bgImage","type":"image","url":"assets/bg.jpg"},
 		{"name":"egretIcon","type":"image","url":"assets/egret_icon.png"},
+		{"name":"stick_knob","type":"image","url":"assets/stick_knob.png"},
+		{"name":"stick_1","type":"image","url":"assets/stick_1.png"},
+		{"name":"stick_2","type":"image","url":"assets/stick_2.png"},
         {"name":"description","type":"json","url":"config/description.json"}
 	],
 
 "groups":
 	[
-        {"name":"preload","keys":"bgImage,egretIcon"}
+        {"name":"preload","keys":"bgImage,egretIcon,stick_knob,stick_1,stick_2"}
 	]
 }
