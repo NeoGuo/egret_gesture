@@ -1,0 +1,20 @@
+{
+    "manifest_version": 2,
+    "name": "Egret手势测试工具",
+    "description": "辅助完成手势测试",
+    "version": "1.0",
+    "browser_action": {
+        "default_icon": "icon.png",
+        "default_popup":"popup.html"
+    },
+    "content_scripts": [
+        {
+            "matches": ["http://localhost/*"],
+            "js": ["lib/jquery-1.8.3.min.js","content/content_script.js"]
+        }
+    ],
+    "permissions": [
+        "tabs",
+        "activeTab"
+    ]
+}
